@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: patients
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 10
+      start_period: 30s
+
+  app:
+    build: .
+    container_name: spring-app
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/patients
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_MAIL_HOST: sandbox.smtp.mailtrap.io
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: 210643b393feca
+      SPRING_MAIL_PASSWORD: 6d160feb44493a
+      SPRING_MAIL_PROTOCOL: smtp
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: true
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: true
+    ports:
+      - "8081:8081"
+
+volumes:
+  mysql_data:
