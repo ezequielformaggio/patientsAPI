@@ -56,7 +56,7 @@ When the credentials are set, open a terminal and run
       ```bash
       docker-compose up --build
       ```
-## Endpoints
+## API Endpoints
 
 ### POST /patient
 
