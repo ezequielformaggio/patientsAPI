@@ -1,0 +1,68 @@
+{
+  "info": {
+    "_postman_id": "98020bac-171e-4b7a-b828-334327b82352",
+    "name": "Patients",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29629291"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "john doe",
+              "type": "text"
+            },
+            {
+              "key": "emailAddress",
+              "value": "johndoe@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "phoneNumber",
+              "value": "112233445566",
+              "type": "text"
+            },
+            {
+              "key": "documentPhoto",
+              "type": "file",
+              "src": ""
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/patients",
+          "host": ["{{baseUrl}}"],
+          "path": ["patients"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sendPendingNotifications",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/patients/notify",
+          "host": ["{{baseUrl}}"],
+          "path": ["patients", "notify"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081",
+      "type": "default"
+    }
+  ]
+}
