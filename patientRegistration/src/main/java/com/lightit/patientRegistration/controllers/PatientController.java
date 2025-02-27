@@ -26,19 +26,22 @@ public class PatientController {
     PatientService patientService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Patient> registerPatient(@Valid
-        @RequestPart("name") String name,
-        @RequestPart("emailAddress") String emailAddress,
-        @RequestPart("phoneNumber") String phoneNumber,
-        @RequestPart("documentPhoto") MultipartFile documentPhoto) throws IOException {
-
-        Patient patient = new Patient();
-        patient.setName(name);
-        patient.setEmailAddress(emailAddress);
-        patient.setPhoneNumber(phoneNumber);
-        patient.setDocumentPhoto(documentPhoto.getBytes());
-        Patient newPatient =  this.patientService.registerPatient(patient);
-        return ResponseEntity.ok(newPatient);
+    public ResponseEntity<?> registerPatient(
+        @Valid @RequestPart("name") String name,
+        @Valid @RequestPart("emailAddress") String emailAddress,
+        @Valid @RequestPart("phoneNumber") String phoneNumber,
+        @Valid @RequestPart("documentPhoto") MultipartFile documentPhoto) throws IOException {
+        try {
+            Patient patient = new Patient();
+            patient.setName(name);
+            patient.setEmailAddress(emailAddress);
+            patient.setPhoneNumber(phoneNumber);
+            patient.setDocumentPhoto(documentPhoto.getBytes());
+            Patient newPatient =  this.patientService.registerPatient(patient);
+            return ResponseEntity.ok(newPatient);
+        } catch(Exception e) {
+            return ResponseEntity.badRequest().body("An error occurred while registering the patient, incorrect: " + e);
+        }
     }
 
     @PatchMapping(path="/notify")

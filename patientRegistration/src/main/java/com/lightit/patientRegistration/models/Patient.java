@@ -17,34 +17,34 @@ public class Patient {
     private long id;
 
     @NotNull
-    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", message = "Name must contain only letters and spaces.")
     private String name;
 
     @NotNull
-    @Email
+    @Email(message = "Email address must contain a valid format")
     private String emailAddress;
 
     @NotNull
-    @Pattern(regexp = "^\\+?[0-9]{7,15}$")
+    @Pattern(regexp = "^\\+?[0-9]{7,15}$", message = "PhoneNumber must contain a valid format")
     private String phoneNumber;
 
     @NotNull
     @Lob
     private byte[] documentPhoto;
 
-    
-
     public Patient() {
     }
 
-    public Patient(@NotNull @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$") String name,
-            @NotNull @Email String emailAddress, @NotNull @Pattern(regexp = "^\\+?[0-9]{7,15}$") String phoneNumber,
-            @NotNull byte[] documentPhoto) {
+
+
+    public Patient(String name,String emailAddress,String phoneNumber,byte[] documentPhoto) {
         this.name = name;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         this.documentPhoto = documentPhoto;
     }
+
+
 
     public String getName() {
         return name;
