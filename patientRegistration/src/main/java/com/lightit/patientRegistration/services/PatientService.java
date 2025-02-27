@@ -3,17 +3,8 @@ package com.lightit.patientRegistration.services;
 import java.io.IOException;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 
 import com.lightit.patientRegistration.Api.MailService;
 import com.lightit.patientRegistration.models.Patient;
